@@ -49,16 +49,15 @@ function getMostCommonGenres(books) {
 
 function getMostPopularBooks(books) {
   //creates a varibale that holds an agumented 'books' array
-  let mostPopular = books.reduce((result, book) => {
-    /*loops through the 'books' array and pushes into a new 'results' array
+  let mostPopular = books.map((book) => {
+     /*loops through the 'books' array and pushes into a new array
     a 'nameAndCount' object with keys 'name' and 'count' and values of the 
     specific book's 'title' value and its 'borrows' array's 'length' value respectively*/
     let nameAndCount = {};
     nameAndCount['name'] = book.title;
     nameAndCount['count'] = book.borrows.length;
-    result.push(nameAndCount);
-    return result;
-  }, []);
+    return nameAndCount;
+  });
   //returns the new array sorted by highest to lowest count with the top 5 values
   return mostPopular.sort((a, b) => b.count - a.count).splice(0,5);
 }
@@ -84,15 +83,15 @@ function getMostPopularAuthors(books, authors) {
   /*loops through the most popular books array and at each individual 'book' object
   it loops through the helper array to see if the individual book name matches the
   name of the book in the helper function and stores that in the 'matchingBook' array.*/
-  let mostPopularAuthors = [];
-  mostPopularBooks.forEach((book) => {
+  let mostPopularAuthors = mostPopularBooks.reduce((result, book) => {
     let matchingBook = authorsAndBooks.find((match) => book.name === match.book);
     /*after finding a match, it creates an object with keys 'name' and 'count'
     holding the 'matchingBook's' author as the name, and the specific book in the loops 'count'
     as the count. it then pushes the object into an empty array before looping again*/
     let authorObject = {name: matchingBook.author, count: book.count};
-    mostPopularAuthors.push(authorObject);
-  });
+    result.push(authorObject);
+    return result;
+  }, []);
   return mostPopularAuthors;
 }
 
