@@ -33,9 +33,10 @@ function getBooksPossessedByAccount(account, books, authors) {
   //creates a variable that represents a filtered version of the 'books' array
   //the filter function will check each individual 'book' object in the 'books' array
   let checkedOutBooks = books.filter((book) => book.borrows.find((borrowed) => 
-    /* the find function will then look through each 'book' object's 'borrows' array                     and checks at each 'borrowed' object if the value of its 'id' key matches the value of
-  the main function's 'account' object's 'id' value and also that the 'borrowed' object's
-  'returned' value is false -meaning the book is still checked out */    
+    /* the find function will then look through each 'book' object's 'borrows' array                     
+    and checks at each 'borrowed' object if the value of its 'id' key matches the value of
+    the main function's 'account' object's 'id' value and also that the 'borrowed' object's
+    'returned' value is false -meaning the book is still checked out */    
   borrowed.id === account.id && borrowed.returned === false));
 
   //loops through the new variable's array 
